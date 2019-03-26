@@ -69,4 +69,23 @@ Listed below are a few types of recommendation systems currently used. Lets look
 
 - Calculate the values of item-item similarity matrix using pairwise cosine similarity of each item pair. 
 
+#### Make recommendation
+
+- Use the user-offer matrix and the similarity matrix to get new offers that are similar to the ones the user liked in the past. 
+
+### Approach for new users
+
+Since we don't have any data on a new user, we can't make similarity based recommendations. Instead, we can use one of the following:
+
+- Recommended the most popular offers. 
+- At the time of joining, ask the user for their preferences, and make offers based on that. 
+
+Once we have enough data about the user, we can use the item-item similarity model. 
+
+### Approach for new offers 
+
+
+
+
+
 
