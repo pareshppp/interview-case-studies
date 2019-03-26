@@ -17,61 +17,28 @@ The analytics team at ABC Telecom has received a new mandate from the CMO. They 
 
 ## Report
 
-### Assumptions
-
-We are making the folowing assumptions about the company:
-
-- 
-
-### Types of Recommendation systems
-
-Listed below are a few types of recommendation systems currently used. Lets look at their applicability to this case.
-
-- **Popularity based recommendation**
- - Recommends the most popular items to the users.
- - Similar to the mass marketing the company currently does.
- - Not a viable approach for 'smart' targeting.
-- **Content/Attribute based recommendaion**
- - Recommendations based on hisorical user information.
- - Viable approach as it suggests recommendationns at an individual level.
- - But it's not super personalized or smart.
-- **User-User Collaborative filtering**
- - Calculate similarity between users based on their response to different offers. Create new offers based on user-user similarity.
- - Becomes very difficult to scale as user count increases.
- - Not viable given the large customer base of the company.
-- **Item-Item Collaborative filtering**
- - Calculate similarity between items/offers based on the response recieved from different users. Suggest the offer to more users based on item-item similarity.
- - Viable approach as it scales well.
- - With the knowledge of similar items/offers, the company can create new bundled package offers.
-- **Matrix Factorization based recommendation**
-- **Model based recommendation**
- - Train embedding vectors for each user and item.
- - Use vector embeddings of users and items to predict response of user to a particular item/offer.
- - Advantage - Hyper personalized recommendation
- - Disadvantage - Black box implementation. We have no idea why a certain recommendation is made.
-
 ### Approach for Existing users & items - Item-Item Collaborative filtering
 
 #### Data Preparation
 
-- We need to represent the user response to offers in the following form:
- - 0 - No user response data. 
- - 1 - Bad
- - 2 - Neutral
- - 3 - Good
-- First we need to record the data with following columns:
+- First we need to record the data with following column structure:
  - User Id
  - Offer Id
  - Response code
-- Pivot the data to get User-Offer matrix with the response as the value. 
+- Response code should be represented in the following form:
+ - 0 - No user-offer interaction 
+ - 1 - Bad response from the user
+ - 2 - Neutral response from the user
+ - 3 - Good response from the user
+- Once the data collected in above format, pivot the data to get User-Offer matrix with the response as the value. 
 
 #### Item-Item Similarity matrix
 
-- Calculate the values of item-item similarity matrix using pairwise cosine similarity of each item pair. 
+Calculate the pairwise cosine similarity of each item pair and store the values in the item-item similarity matrix.
 
 #### Make recommendation
 
-- Use the user-offer matrix and the similarity matrix to get new offers that are similar to the ones the user liked in the past. 
+Use the user-offer matrix and the similarity matrix to get new offers that are similar to the ones the user liked in the past. 
 
 ### Approach for new users
 
@@ -86,11 +53,15 @@ Once we have enough data about the user, we can use the item-item similarity mod
 
 Without any user response data for an offer, our similarity model will not work. So, when a new offer is introduced, we can use the content of the offer and user preferences to recommend it to users. Once we have enough data, we can use the similarity model. 
 
-### Aproach for choosing Channel
+### Approach for choosing Channel
 
+The choice for channel can be done in one of the following ways:
 
+- Ask the user for channel preference when they join.
+- Run a second recommendation system that predicts which channel each user likes best.
 
+### Effort involved
 
-
+The recommendation model described above is not very complex in itself. The complexity in the above recommendation system comes from the size and type of input data. Since most of the time will be spent on gathering, storing, cleaning and preparing the data to be fed into the model, the effort involved will largely depend on data collection and data preparation phase.
 
 
