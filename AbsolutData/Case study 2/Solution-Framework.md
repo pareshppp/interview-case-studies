@@ -21,8 +21,6 @@ The analytics team at ABC Telecom has received a new mandate from the CMO. They 
 
 We are making the folowing assumptions about the company:
 
-- The company has a very large user base.
-- The company values the financial returns from the recommendations more than their model explainability.
 - 
 
 ### Types of Recommendation systems
@@ -45,12 +43,30 @@ Listed below are a few types of recommendation systems currently used. Lets look
  - Calculate similarity between items/offers based on the response recieved from different users. Suggest the offer to more users based on item-item similarity.
  - Viable approach as it scales well.
  - With the knowledge of similar items/offers, the company can create new bundled package offers.
-- **Model based Collaborative filtering**
+- **Matrix Factorization based recommendation**
+- **Model based recommendation**
  - Train embedding vectors for each user and item.
  - Use vector embeddings of users and items to predict response of user to a particular item/offer.
  - Advantage - Hyper personalized recommendation
  - Disadvantage - Black box implementation. We have no idea why a certain recommendation is made.
 
-### Approach
+### Approach for Existing users & items - Item-Item Collaborative filtering
+
+#### Data Preparation
+
+- We need to represent the user response to offers in the following form:
+ - 0 - No user response data. 
+ - 1 - Bad
+ - 2 - Neutral
+ - 3 - Good
+- First we need to record the data with following columns:
+ - User Id
+ - Offer Id
+ - Response code
+- Pivot the data to get User-Offer matrix with the response as the value. 
+
+#### Item-Item Similarity matrix
+
+- Calculate the values of item-item similarity matrix using pairwise cosine similarity of each item pair. 
 
 
