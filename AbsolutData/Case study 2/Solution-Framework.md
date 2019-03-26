@@ -84,6 +84,11 @@ Once we have enough data about the user, we can use the item-item similarity mod
 
 ### Approach for new offers 
 
+Without any user response data for an offer, our similarity model will not work. So, when a new offer is introduced, we can use the content of the offer and user preferences to recommend it to users. Once we have enough data, we can use the similarity model. 
+
+### Aproach for choosing Channel
+
+
 
 
 
